@@ -1,0 +1,24 @@
+`define DEBUG_SYNTHESIS
+
+/*
+
+	This file contains parameters for various display modules to use. Don't change COLORBITS, but you can
+	mess with the other parameters if you want to see what it does.
+
+*/
+
+`ifdef DEBUG_SYNTHESIS
+
+localparam	WIDTH     = 20,
+				HEIGHT    = 15,
+				PIXELSIZE = 32,
+				COLORBITS = 9;
+				
+`else
+
+localparam	WIDTH     = 40,
+				HEIGHT    = 30,
+				PIXELSIZE = 16,
+				COLORBITS = 9;
+
+`endif
