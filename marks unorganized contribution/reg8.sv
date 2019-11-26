@@ -5,6 +5,6 @@ module reg8(input logic clk,
 	assign q[11:8] = 0;
 	
 	always_ff@(posedge clk)
-		q <= d;
+		q[7:0] <= d[7:0];
 		
 endmodule
