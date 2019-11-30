@@ -1,15 +1,19 @@
 module inputselect (	input logic clk,
 							input logic next,
 							input logic prev,
+							input logic reset,
 							output logic [1:0] sel);
 							
 	typedef enum logic [1:0] {A, B, C} estate;
 	estate currentState, nextState;
 	
-	always_ff@(posedge clk)
-		currentState = nextState;
-	
-	always_comb
+	always_ff@(posedge clk, posedge reset)
+		begin
+			if (reset) 	nextState = A;
+			currentState = nextState;
+		end
+		
+	always_ff@(posedge next, posedge prev)
 		case(currentState)
 			A:	if (next)		nextState = B;
 				else if (prev)	nextState = C;

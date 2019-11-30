@@ -321,6 +321,13 @@ refer to the applicable agreement for further details.
 		(line (pt 0 64)(pt 16 64))
 	)
 	(port
+		(pt 0 80)
+		(input)
+		(text "reset" (rect 0 0 24 12)(font "Arial" ))
+		(text "reset" (rect 21 75 45 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
 		(pt 152 32)
 		(output)
 		(text "sel[1..0]" (rect 0 0 40 12)(font "Arial" ))
@@ -833,5 +840,9 @@ refer to the applicable agreement for further details.
 	(pt 888 -48)
 	(pt 912 -48)
 	(bus)
+)
+(connector
+	(pt 448 128)
+	(pt 456 128)
 )
 (junction (pt 648 80))

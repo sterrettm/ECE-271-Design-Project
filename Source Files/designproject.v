@@ -14,7 +14,7 @@
 
 // PROGRAM		"Quartus Prime"
 // VERSION		"Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition"
-// CREATED		"Fri Nov 29 14:13:31 2019"
+// CREATED		"Fri Nov 29 15:14:36 2019"
 
 module designproject(
 	next,
@@ -82,6 +82,7 @@ inputselect	b2v_inst3(
 	.clk(clk_10MHz),
 	.next(next),
 	.prev(prev),
+	.reset(reset),
 	.sel(SYNTHESIZED_WIRE_5));
 
 
