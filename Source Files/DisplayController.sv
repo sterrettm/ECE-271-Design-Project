@@ -17,15 +17,81 @@ input logic [2:0] r_write, g_write, b_write
 
 logic [9:0]x_next, y_next;
 logic [5:0]x_next_norm, y_next_norm;
-logic [8:0]colorbits;
+logic [8:0]writecolorbits;
 logic [3:0]r_next, g_next, b_next, r_in, g_in, b_in;
 logic clock1Hz, cursor_on;
+
+ColorController colorcontroller(
+.clock50MHz  (clock50MHz),
+.x_cursor    (x_cursor),
+.y_cursor    (y_cursor),
+.r_write     (r_write),
+.g_write     (g_write),
+.b_write     (b_write),
+.x_next      (x_next),
+.y_next      (y_next),
+.x_next_norm (x_next_norm),
+.y_next_norm (y_next_norm),
+.colorbits   (writecolorbits),
+.r_in        (r_in),
+.g_in        (g_in),
+.b_in        (b_in),
+.r_next      (r_next),
+.g_next      (g_next),
+.b_next      (b_next)
+);
+
+VGARegister register(
+.clock     (clock50MHz),
+.x_next    (x_next_norm),
+.y_next    (y_next_norm),
+.x_write   (x_cursor),
+.y_write   (y_cursor),
+.r_out     (r_next),
+.g_out     (g_next),
+.b_out     (b_next),
+.write     (write),
+.colorbits (writecolorbits)
+);
+
+
+VGAAdapter vga(
+.pixel_clock (clock25MHz),
+.r_out       (r),
+.g_out       (g),
+.b_out       (b),
+.r_in        (r_in),
+.g_in        (g_in),
+.b_in        (b_in),
+
+.h_sync      (h_sync),
+.v_sync      (v_sync),
+.x_fetch     (x_next),
+.y_fetch     (y_next)
+);
+
+endmodule
+
+module ColorController(
+input  logic clock50MHz,
+input  logic [9:0] x_next, y_next,
+output logic [5:0] x_next_norm, y_next_norm,
+input  logic [5:0] x_cursor, y_cursor,
+input  logic [2:0] r_write, g_write, b_write,
+output logic [8:0] colorbits,
+input  logic [3:0] r_next, g_next, b_next,
+output logic [3:0] r_in, g_in, b_in
+);
+
+`include "DISPLAY_PARAMS.sv_params"
 
 Counter #(50000000, 26) clockslower1hz(
 .clockin  (clock50MHz),
 .reset    (1'b0),
 .clockout (clock1Hz)
 );
+
+logic cursor_on;
 
 always_ff @(posedge clock1Hz)
 begin
@@ -54,34 +120,5 @@ begin
 	colorbits = {b_write, g_write, r_write};
 	
 end
-
-VGARegister register(
-.clock     (clock50MHz),
-.x_next    (x_next_norm),
-.y_next    (y_next_norm),
-.x_write   (x_cursor),
-.y_write   (y_cursor),
-.r_out     (r_next),
-.g_out     (g_next),
-.b_out     (b_next),
-.write     (write),
-.colorbits (colorbits)
-);
-
-
-VGAAdapter vga(
-.pixel_clock (clock25MHz),
-.r_out       (r),
-.g_out       (g),
-.b_out       (b),
-.r_in        (r_in),
-.g_in        (g_in),
-.b_in        (b_in),
-
-.h_sync      (h_sync),
-.v_sync      (v_sync),
-.x_fetch     (x_next),
-.y_fetch     (y_next)
-);
 
 endmodule
