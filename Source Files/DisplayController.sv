@@ -25,14 +25,10 @@ ColorController colorcontroller(
 .clock50MHz  (clock50MHz),
 .x_cursor    (x_cursor),
 .y_cursor    (y_cursor),
-.r_write     (r_write),
-.g_write     (g_write),
-.b_write     (b_write),
 .x_next      (x_next),
 .y_next      (y_next),
 .x_next_norm (x_next_norm),
 .y_next_norm (y_next_norm),
-.colorbits   (writecolorbits),
 .r_in        (r_in),
 .g_in        (g_in),
 .b_in        (b_in),
@@ -51,7 +47,9 @@ VGARegister register(
 .g_out     (g_next),
 .b_out     (b_next),
 .write     (write),
-.colorbits (writecolorbits)
+.r_write   (r_write),
+.g_write   (g_write),
+.b_write   (b_write)
 );
 
 
@@ -77,8 +75,6 @@ input  logic clock50MHz,
 input  logic [9:0] x_next, y_next,
 output logic [5:0] x_next_norm, y_next_norm,
 input  logic [5:0] x_cursor, y_cursor,
-input  logic [2:0] r_write, g_write, b_write,
-output logic [8:0] colorbits,
 input  logic [3:0] r_next, g_next, b_next,
 output logic [3:0] r_in, g_in, b_in
 );
@@ -116,8 +112,6 @@ begin
 		g_in = g_next;
 		b_in = b_next;
 	end
-	
-	colorbits = {b_write, g_write, r_write};
 	
 end
 

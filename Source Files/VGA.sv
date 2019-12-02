@@ -95,12 +95,12 @@ module VGARegister(
 	input clock, write,
 	input  [5:0] x_next, y_next, x_write, y_write,
 	output [3:0] r_out, g_out, b_out,
-	input  [8:0] colorbits
+	input  [2:0] r_write, g_write, b_write
 );
 
 `include "DISPLAY_PARAMS.sv_params"
 
-logic [8:0]color_out;
+logic [8:0]color_out, colorbits;
 
 logic [11:0]addr, write_addr;
 
@@ -159,6 +159,7 @@ begin
 	
 	addr = x_next + y_next * WIDTH;
 	write_addr = x_write + y_write * WIDTH;
+	colorbits = {b_write, g_write, r_write};
 end
 
 endmodule
