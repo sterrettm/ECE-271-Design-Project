@@ -1,4 +1,4 @@
-`define DEBUG_SYNTHESIS
+`define HALF_RES
 
 /*
 
@@ -7,7 +7,7 @@
 
 */
 
-`ifdef DEBUG_SYNTHESIS
+`ifdef HALF_RES
 
 localparam	WIDTH     = 20,
 				HEIGHT    = 15,
