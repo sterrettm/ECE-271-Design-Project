@@ -1,6 +1,6 @@
 module inputTypeDisplay(input logic [1:0] sel,
-								output logic [6:0] seg0, seg1, seg2,
-								output logic [6:0] seg3, seg4, seg5);
+								output logic [6:0] Seg0, Seg1, Seg2,
+								output logic [6:0] Seg3, Seg4, Seg5);
 								
 	// NES 7-segment values
 	logic [6:0] nes0 = 7'b100_1000;
@@ -19,30 +19,30 @@ module inputTypeDisplay(input logic [1:0] sel,
 	always_comb
 		if 		(sel == 2'b00)
 			begin
-				seg0 <= nes0;
-				seg1 <= nes1;
-				seg2 <= nes2;
-				seg3 <= empty;
-				seg4 <= empty;
-				seg5 <= empty;
+				Seg0 <= nes0;
+				Seg1 <= nes1;
+				Seg2 <= nes2;
+				Seg3 <= empty;
+				Seg4 <= empty;
+				Seg5 <= empty;
 			end
 		else if 	(sel == 2'b01)
 			begin
-				seg0 <= snes0;
-				seg1 <= snes1;
-				seg2 <= snes2;
-				seg3 <= snes3;
-				seg4 <= empty;
-				seg5 <= empty;
+				Seg0 <= snes0;
+				Seg1 <= snes1;
+				Seg2 <= snes2;
+				Seg3 <= snes3;
+				Seg4 <= empty;
+				Seg5 <= empty;
 			end
 		else
 			begin
-				seg0 <= empty;
-				seg1 <= empty;
-				seg2 <= empty;
-				seg3 <= empty;
-				seg4 <= empty;
-				seg5 <= empty;
+				Seg0 <= empty;
+				Seg1 <= empty;
+				Seg2 <= empty;
+				Seg3 <= empty;
+				Seg4 <= empty;
+				Seg5 <= empty;
 			end
 			
 endmodule 
