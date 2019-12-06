@@ -12,7 +12,7 @@ module inputseltest (input logic clk_10MHz,
 		else								clk_slow <= 0;
 					
 					
-	Counter slow (
+	Counter24 slow (
 	.clk(clk_10MHz),
 	.reset(reset | clk_slow),
 	.q(count)
@@ -37,7 +37,7 @@ module inputseltest (input logic clk_10MHz,
 	
 endmodule
 
-module Counter #(N=24) 
+module Counter24 #(N=24) 
 					(input logic clk,
 					 input logic reset,
 					 output logic [N-1:0] q);
