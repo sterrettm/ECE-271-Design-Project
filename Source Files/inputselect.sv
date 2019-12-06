@@ -8,7 +8,7 @@ module inputselect (	input logic clk,
 	always_ff@(posedge next)
 		state <= state + 2'b01;
 	
-	sync sync_1 (
+	sync#(2) sync_1 (
 	.clk(clk),
 	.d(state),
 	.q(sel)
