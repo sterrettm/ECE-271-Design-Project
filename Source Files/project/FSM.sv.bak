@@ -1,0 +1,31 @@
+module FSM (input logic clk_10MHz,
+				input logic clk_30Hz,
+				input logic data_in,
+				output logic Latch,
+				output logic clk_data,
+				output logic [7:0] data_out);
+						
+	enum {S0, S1} enumState;
+	enumState state;
+	
+	logic en_clk_data;
+	
+	assign clk_data = (en_clk_data & clk_50MHz);
+	
+	always_ff@(posedge clk_30Hz)
+		if (state == S0)
+			begin
+				state <= S1;
+				Latch <= 1;
+			end
+		else if (state == S1)	state <= S0;
+		else							state <= S0;
+	
+	always_ff@(posedge clk_10MHz)
+		if (state == S1)
+			begin
+				Latch <= 0;
+				en_clk_data <= 1;
+			end
+		else	en_clk_data <= 0;
+endmodule

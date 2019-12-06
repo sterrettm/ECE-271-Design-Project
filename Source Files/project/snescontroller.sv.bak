@@ -1,0 +1,8 @@
+module snescontroller(input logic clk,
+							input logic Latch,
+							input logic a, b, x, y, rb, lb, up, dn, lt, rt, st, sel,
+							output logic data);
+
+	ShiftReg shiftregister(.clk(clk), .load(Latch), .d({b, y, sel, st, up, dn, lt, rt, a, x, lb, rb}), .sout(data));
+				
+endmodule

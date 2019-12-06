@@ -1,0 +1,25 @@
+module nescontroller(input logic clk,
+							input logic Latch,
+							input logic a, b, up, dn, lt, rt, st, sel,
+							output logic data);
+
+	ShiftReg shiftregister();
+							
+	always_ff@(posedge Latch, posedge clk, negedge clk)
+		if (posedge Latch)
+			begin
+				shiftregister.d ({rt, lt, dn, up, st, sel, b, a});
+				shiftregister.load (LATCH);
+			end
+			
+		if (posedge clk)
+			begin
+				shiftregister.sin (1);
+				shiftregister.clk (1);
+			end
+		
+		if (negedge clk)
+			begin
+				shiftregister.clk (0);
+				
+endmodule 

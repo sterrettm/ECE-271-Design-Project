@@ -1,0 +1,27 @@
+module inputseltest (input logic clk_10MHz,
+							input logic reset,
+							input logic next,
+							input logic prev,
+							output logic [6:0] Seg0, Seg1, Seg2, Seg3, Seg4, Seg5);
+						
+	logic [1:0] selector;	
+					
+	inputselect inpsel (
+	.clk(clk_10MHz),
+	.reset(reset),
+	.next(next),
+	.prev(prev),
+	.sel(selector)
+	);
+	
+	inputTypeDisplay disp (
+	.sel(selector),
+	.Seg0(Seg0),
+	.Seg1(Seg1),
+	.Seg2(Seg2),
+	.Seg3(Seg3),
+	.Seg4(Seg4),
+	.Seg5(Seg5)
+	);
+	
+endmodule
