@@ -1,6 +1,0 @@
-module clockadjust(input logic clk,
-						input logic factor,
-						output logic clk_n);
-						
-	comparator comparator_instance(.a(
-	counter counter_instance(.clk(clk));
